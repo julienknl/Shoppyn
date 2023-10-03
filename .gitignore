@@ -1,0 +1,58 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcworkspace/
+*.xcuserstate
+*.xcproj/
+
+# iOS build products
+/build/
+*.ipa
+*.xcarchive
+*.xctestrun
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Checkouts/
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+
+# Dependencies
+/vendor/
+/node_modules/
+/Packages/
+.yarn/
+
+# Logs and data files
+*.log
+*.sqlite
+*.coredata
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Compiled binary files
+*.o
+*.pyc
+
+# User-specific files
+.idea/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# Miscellaneous
+/.vs/
+/.sconf_temp/
+.sconsign.dblite
+.cache/
