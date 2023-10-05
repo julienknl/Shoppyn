@@ -25,7 +25,15 @@ struct ShoppynApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                
+                History()
+                    .tabItem { Image(uiImage: UIImage(named: "mainicon") ?? UIImage()) }
+                
+                Setting()
+                    .tabItem { Image(uiImage: UIImage(named: "moreicon") ?? UIImage()) }
+            }
+            .tint(Colour.main)
         }
         .modelContainer(sharedModelContainer)
     }
