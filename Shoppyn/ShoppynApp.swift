@@ -27,7 +27,7 @@ struct ShoppynApp: App {
         WindowGroup {
             TabView {
                 
-                History()
+                Main()
                     .tabItem { Image(uiImage: UIImage(named: "mainicon") ?? UIImage()) }
                 
                 Setting()
