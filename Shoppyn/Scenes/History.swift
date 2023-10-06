@@ -10,10 +10,18 @@ import SwiftUI
 struct History: View {
     
     @EnvironmentObject private var coordinator: Coordinator
+    @State private var histories: [HistoryItem] = []
     
     var body: some View {
         VStack {
-            Text("History element")
+            List {
+                ForEach(histories) { history in
+                    SubtitledItem(history: history)
+                }
+            }
+            .frame( maxWidth: .infinity)
+            .ignoresSafeArea(.all, edges: [.leading, .trailing])
+            .listStyle(PlainListStyle())
         }
         .navigationTitle("History")
         .toolbar {
