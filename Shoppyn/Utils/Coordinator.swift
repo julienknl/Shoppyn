@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-enum NavigationPage: String, Identifiable {
-    case history, newShoppingList
+enum NavigationPage: Hashable, Identifiable {
+    case history
+    case newShoppingList(isNew: Bool)
     
     var id: String {
-        self.rawValue
+        return UUID().uuidString
     }
+    
 }
 
 class Coordinator: ObservableObject {
@@ -38,8 +40,8 @@ class Coordinator: ObservableObject {
         case .history:
             History()
             
-        case .newShoppingList:
-            NewShoppingList()
+        case .newShoppingList(let isNew):
+            NewShoppingList(isNew: isNew)
             
         }
     }

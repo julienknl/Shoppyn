@@ -27,7 +27,7 @@ struct History: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    coordinator.push(.newShoppingList)
+                    coordinator.push(.newShoppingList(isNew: true))
                 }) {
                     Image(uiImage: UIImage(named: "addicon") ?? UIImage())
                 }
