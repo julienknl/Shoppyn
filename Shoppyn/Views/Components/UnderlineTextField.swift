@@ -11,6 +11,7 @@ struct UnderlineTextField: View {
     
     @FocusState var isFocused: Bool
     @Binding var budget: String
+    var keyboardType: UIKeyboardType = .default
     
     var body: some View {
         VStack {
@@ -18,6 +19,7 @@ struct UnderlineTextField: View {
                 .focused($isFocused)
                 .font(.system(size: 30))
                 .multilineTextAlignment(.center)
+                .keyboardType(keyboardType)
             Rectangle()
                 .frame(height: 2)
                 .foregroundStyle(isFocused ? Colour.main : Color.gray.opacity(0.5))
