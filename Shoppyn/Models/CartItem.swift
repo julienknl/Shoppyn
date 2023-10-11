@@ -12,4 +12,5 @@ struct CartItem: Identifiable {
     var name: String = ""
     var quantity: Int = 0
     var amount: Double = 0.0
+    var isCheckOn: Bool = false
 }

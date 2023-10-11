@@ -10,6 +10,7 @@ import SwiftUI
 enum NavigationPage: Hashable, Identifiable {
     case history
     case newShoppingList(isNew: Bool)
+    case inShoppingList
     
     var id: String {
         return UUID().uuidString
@@ -42,6 +43,9 @@ class Coordinator: ObservableObject {
             
         case .newShoppingList(let isNew):
             NewShoppingList(isNew: isNew)
+            
+        case .inShoppingList:
+            InShoppingList()
             
         }
     }

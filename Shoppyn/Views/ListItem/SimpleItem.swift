@@ -9,34 +9,35 @@ import SwiftUI
 
 struct SimpleItem: View {
     
-    var title: String
-    var count: Int
-    var amount: Double
+    @Binding var item: CartItem
     var showCheckbox: Bool = false
-    @State var isCheckOn: Bool = false
     
     var body: some View {
         HStack {
             
             if showCheckbox {
-                CheckBox(isOn: $isCheckOn)
+                CheckBox(isOn: $item.isCheckOn)
                     .padding([.leading], 8)
             }
             
-            Text("\(count) x \(title)")
+            Text("\(item.quantity) x \(item.name)")
                 .lineLimit(1)
                 .padding([.leading, .trailing], showCheckbox ? 2 : 8)
             
             Spacer()
             
-            Text(amount > 0 ? "\(amount.round(to: 2))" : "")
-                .lineLimit(1)
+            if item.isCheckOn {
+                OutlineTextField(item: Binding(get: { item.amount > 0 ? String(item.amount) : "" },
+                                               set: { if let amount = Double($0) { item.amount = amount } }),
+                                 placeholder: "$",
+                                 size: CGSize(width: 60, height: 43))
                 .padding([.leading, .trailing], 8)
+            }
             
         }.frame(height: 43)
     }
 }
 
-#Preview {
-    SimpleItem(title: "Item", count: 1, amount: 0.0, showCheckbox: false)
-}
+//#Preview {
+//    SimpleItem(item: CartItem(name: "Item", quantity: 1), showCheckbox: false)
+//}

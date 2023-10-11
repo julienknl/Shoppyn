@@ -49,10 +49,8 @@ struct NewShoppingList: View {
             .padding([.top, .leading, .trailing], 16)
             
             List {
-                ForEach(items) { item in
-                    SimpleItem(title: item.name,
-                               count: item.quantity,
-                               amount: item.amount)
+                ForEach($items) { item in
+                    SimpleItem(item: item)
                 }
             }
             .ignoresSafeArea()
@@ -64,14 +62,14 @@ struct NewShoppingList: View {
         .toolbar {
             
             if !isNew {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {}, label: {
                         Text("Edit")
                     })
                 }
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button(action: {}, label: {
                     Text("Done")
                 })

@@ -18,8 +18,7 @@ struct OutlineTextField: View {
         RoundedRectangle(cornerRadius: 8)
             .stroke(Colour.main)
             .foregroundStyle(Colour.main)
-            .frame(width: size.width == 0 ? nil : size.width, height: size.height
-            )
+            .frame(width: size.width == 0 ? nil : size.width, height: size.height)
             .overlay(
                 TextField(placeholder, text: $item)
                     .keyboardType(keyboardType)
