@@ -29,6 +29,8 @@
 		4BD6B0DD2AD0071600EC1D4C /* SubtitledItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD6B0DC2AD0071600EC1D4C /* SubtitledItem.swift */; };
 		4BDE916D2AD677F6005908CD /* InShoppingListScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDE916C2AD677F6005908CD /* InShoppingListScene.swift */; };
 		4BDE91712AD6786A005908CD /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDE91702AD6786A005908CD /* CircularProgressView.swift */; };
+		4BFAC1FB2AD9623700DF647C /* CompletedShoppingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFAC1FA2AD9623700DF647C /* CompletedShoppingScene.swift */; };
+		4BFAC1FD2AD964CB00DF647C /* DynamicDotsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFAC1FC2AD964CB00DF647C /* DynamicDotsText.swift */; };
 		4BFBC0EF2ACED0FA00DF434E /* NewShoppingListScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFBC0EE2ACED0FA00DF434E /* NewShoppingListScene.swift */; };
 		4BFBC0F12ACEDC5F00DF434E /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFBC0F02ACEDC5F00DF434E /* MainScene.swift */; };
 		4BFDF0682AD031C80020E018 /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDF0672AD031C80020E018 /* UnderlineTextField.swift */; };
@@ -78,6 +80,8 @@
 		4BD6B0DC2AD0071600EC1D4C /* SubtitledItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitledItem.swift; sourceTree = "<group>"; };
 		4BDE916C2AD677F6005908CD /* InShoppingListScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InShoppingListScene.swift; sourceTree = "<group>"; };
 		4BDE91702AD6786A005908CD /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		4BFAC1FA2AD9623700DF647C /* CompletedShoppingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedShoppingScene.swift; sourceTree = "<group>"; };
+		4BFAC1FC2AD964CB00DF647C /* DynamicDotsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicDotsText.swift; sourceTree = "<group>"; };
 		4BFBC0EE2ACED0FA00DF434E /* NewShoppingListScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingListScene.swift; sourceTree = "<group>"; };
 		4BFBC0F02ACEDC5F00DF434E /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		4BFDF0672AD031C80020E018 /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				4BFBC0EE2ACED0FA00DF434E /* NewShoppingListScene.swift */,
 				4BFBC0F02ACEDC5F00DF434E /* MainScene.swift */,
 				4BDE916C2AD677F6005908CD /* InShoppingListScene.swift */,
+				4BFAC1FA2AD9623700DF647C /* CompletedShoppingScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				4BFDF06B2AD048980020E018 /* OutlineTextField.swift */,
 				4B0F2BDA2AD55D2600D45C32 /* CheckBox.swift */,
 				4BDE91702AD6786A005908CD /* CircularProgressView.swift */,
+				4BFAC1FC2AD964CB00DF647C /* DynamicDotsText.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -380,6 +386,7 @@
 			files = (
 				4B0F2BDB2AD55D2600D45C32 /* CheckBox.swift in Sources */,
 				4B0F2BD92AD55B7800D45C32 /* DoubleExtension.swift in Sources */,
+				4BFAC1FD2AD964CB00DF647C /* DynamicDotsText.swift in Sources */,
 				4B072CF62AD934CC00EBBA46 /* UIApplicationExtension.swift in Sources */,
 				4BDE91712AD6786A005908CD /* CircularProgressView.swift in Sources */,
 				4B0F2BDD2AD561D100D45C32 /* CartItem.swift in Sources */,
@@ -388,6 +395,7 @@
 				4BFDF0682AD031C80020E018 /* UnderlineTextField.swift in Sources */,
 				4B072CF82AD946F600EBBA46 /* StringExtension.swift in Sources */,
 				4BFBC0F12ACEDC5F00DF434E /* MainScene.swift in Sources */,
+				4BFAC1FB2AD9623700DF647C /* CompletedShoppingScene.swift in Sources */,
 				4BFBC0EF2ACED0FA00DF434E /* NewShoppingListScene.swift in Sources */,
 				4BD6B0DA2AD004A900EC1D4C /* HistoryItem.swift in Sources */,
 				4BD6B0DD2AD0071600EC1D4C /* SubtitledItem.swift in Sources */,

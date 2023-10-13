@@ -23,10 +23,11 @@ struct SimpleItem: View {
             Text("\(item.quantity) x \(item.name)")
                 .lineLimit(1)
                 .padding([.leading, .trailing], showCheckbox ? 2 : 8)
+                .opacity(!showCheckbox && (!item.isCheckOn || item.amount <= 0) ? 0.5 : 1)
             
             Spacer()
             
-            if item.isCheckOn {
+            if item.isCheckOn && showCheckbox {
                 HStack {
                     Text("$")
                     OutlineTextField(item: Binding(
@@ -44,6 +45,12 @@ struct SimpleItem: View {
                                      size: CGSize(width: 70, height: 43))
                 }
                 .padding([.leading, .trailing], 8)
+            }
+
+            
+            if !showCheckbox {
+                Text("$\(item.amount.round(to: 2))")
+                    .opacity(!showCheckbox && (!item.isCheckOn || item.amount <= 0) ? 0.5 : 1)
             }
             
         }.frame(height: 43)

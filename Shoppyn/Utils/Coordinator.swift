@@ -11,6 +11,7 @@ enum NavigationPage: Hashable, Identifiable {
     case history
     case newShoppingList(isNew: Bool)
     case inShoppingList(budget: Double)
+    case completedShopping
     
     var id: String {
         return UUID().uuidString
@@ -46,6 +47,9 @@ class Coordinator: ObservableObject {
             
         case .inShoppingList(let budget):
             InShoppingListScene(budget: budget)
+            
+        case .completedShopping:
+            CompletedShoppingScene()
             
         }
     }
