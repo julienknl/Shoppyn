@@ -7,31 +7,50 @@
 
 import SwiftUI
 
-struct InShoppingList: View {
+struct InShoppingListScene: View {
     
-    @State private var progress: Double = 1
-    @State private var budget: Double = 0
+    @State private var progress: Double = 0
+    @State private var maximumBudget: Double = 0
     private var staticBudget: Double = 0
     @State private var presentError: Bool = false
-    @State private var items: [CartItem] = []
+    @State private var items: [CartItem] = [
+        CartItem(name: "Coffee", quantity: 1),
+        CartItem(name: "Coffee", quantity: 1),
+        CartItem(name: "Coffee", quantity: 1),
+        CartItem(name: "Coffee", quantity: 1),
+        CartItem(name: "Coffee", quantity: 1)
+    ]
+    
+    init(budget: Double) {
+        self._maximumBudget = State(initialValue: budget)
+        self._progress = State(initialValue: budget/1)
+        staticBudget = budget
+    }
     
     var body: some View {
+        
         GeometryReader { geometry in
             VStack {
-
+                
                 CircularProgressView(progress: $progress)
                     .frame(width: geometry.size.width - geometry.size.width/3)
                     .overlay(content: {
                         VStack {
                             Text("Budget: $\(staticBudget.round(to: 2))")
                                 .foregroundStyle(Colour.main)
-                            Text("$\(budget.round(to: 2)) left")
+                            Text("$\(maximumBudget.round(to: 2)) left")
                         }
                     })
                 
                 List {
-                    ForEach($items) { item in
-                        SimpleItem(item: item, showCheckbox: true)
+                    ForEach($items) { $item in
+                        SimpleItem(item: $item, showCheckbox: true)
+                            .onSubmit {
+                                $maximumBudget.wrappedValue = staticBudget - items.reduce(0, { $0 + $1.amount })
+                                let calculatedProgress = max(0, $maximumBudget.wrappedValue) / staticBudget
+                                $progress.wrappedValue = calculatedProgress
+                            }
+                            .submitLabel(.done)
                     }
                 }
                 .listStyle(PlainListStyle())
@@ -58,5 +77,5 @@ struct InShoppingList: View {
 }
 
 #Preview {
-    InShoppingList()
+    InShoppingListScene(budget: 700)
 }

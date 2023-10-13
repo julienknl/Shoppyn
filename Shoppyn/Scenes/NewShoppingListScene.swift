@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NewShoppingList: View {
+struct NewShoppingListScene: View {
     
     @State private var budget: Double = 0.0
     @State private var item: CartItem = CartItem()
@@ -81,5 +81,5 @@ struct NewShoppingList: View {
 }
 
 #Preview {
-    NewShoppingList()
+    NewShoppingListScene()
 }

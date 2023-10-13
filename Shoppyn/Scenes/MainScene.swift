@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Main: View {
+struct MainScene: View {
     
     @StateObject private var coordinator = Coordinator()
     
@@ -28,5 +28,5 @@ struct Main: View {
 }
 
 #Preview {
-    Main()
+    MainScene()
 }

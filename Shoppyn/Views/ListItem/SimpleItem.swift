@@ -27,10 +27,22 @@ struct SimpleItem: View {
             Spacer()
             
             if item.isCheckOn {
-                OutlineTextField(item: Binding(get: { item.amount > 0 ? String(item.amount) : "" },
-                                               set: { if let amount = Double($0) { item.amount = amount } }),
-                                 placeholder: "$",
-                                 size: CGSize(width: 60, height: 43))
+                HStack {
+                    Text("$")
+                    OutlineTextField(item: Binding(
+                        get: {
+                            item.amount > 0 ? (String(item.amount)) : ""
+                        },
+                        set: { newValue in
+                            print(newValue.extractNumbers())
+                            if let amount = Double(newValue) {
+                                item.amount = amount
+                            }
+                        }
+                    ),
+                                     placeholder: "0.00",
+                                     size: CGSize(width: 70, height: 43))
+                }
                 .padding([.leading, .trailing], 8)
             }
             

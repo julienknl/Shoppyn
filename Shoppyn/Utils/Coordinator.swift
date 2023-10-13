@@ -10,7 +10,7 @@ import SwiftUI
 enum NavigationPage: Hashable, Identifiable {
     case history
     case newShoppingList(isNew: Bool)
-    case inShoppingList
+    case inShoppingList(budget: Double)
     
     var id: String {
         return UUID().uuidString
@@ -39,13 +39,13 @@ class Coordinator: ObservableObject {
         switch page {
             
         case .history:
-            History()
+            HistoryScene()
             
         case .newShoppingList(let isNew):
-            NewShoppingList(isNew: isNew)
+            NewShoppingListScene(isNew: isNew)
             
-        case .inShoppingList:
-            InShoppingList()
+        case .inShoppingList(let budget):
+            InShoppingListScene(budget: budget)
             
         }
     }

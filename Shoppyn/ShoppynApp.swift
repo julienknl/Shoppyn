@@ -27,10 +27,10 @@ struct ShoppynApp: App {
         WindowGroup {
             TabView {
                 
-                Main()
+                MainScene()
                     .tabItem { Image(uiImage: UIImage(named: "mainicon") ?? UIImage()) }
                 
-                Setting()
+                SettingScene()
                     .tabItem { Image(uiImage: UIImage(named: "moreicon") ?? UIImage()) }
             }
             .tint(Colour.main)

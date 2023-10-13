@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct History: View {
+struct HistoryScene: View {
     
     @EnvironmentObject private var coordinator: Coordinator
     @State private var histories: [HistoryItem] = []
@@ -37,5 +37,5 @@ struct History: View {
 }
 
 #Preview {
-    History()
+    HistoryScene()
 }
