@@ -9,6 +9,8 @@ import SwiftUI
 
 struct NewShoppingListScene: View {
     
+    @EnvironmentObject private var coordinator: Coordinator
+    @Environment(\.modelContext) private var context
     @State private var budget: Double = 0.0
     @State private var item: CartItem = CartItem()
     var isNew: Bool = false
@@ -37,8 +39,7 @@ struct NewShoppingListScene: View {
                                           quantity: item.quantity,
                                           amount: 0.0))
                     
-                    item.name = ""
-                    item.quantity = 0
+                    item = CartItem()
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                 }) {
                     Image(uiImage: UIImage(named: "addicon") ?? UIImage())
@@ -61,22 +62,32 @@ struct NewShoppingListScene: View {
         }
         .toolbar {
             
-            if !isNew {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {}, label: {
-                        Text("Edit")
-                    })
-                }
-            }
+//            if !isNew {
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button(action: {}, label: {
+//                        Text("Edit")
+//                    })
+//                }
+//            }
             
             ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {}, label: {
+                Button(action: {
+                    if isNew {
+                        addItems()
+                    }
+                }, label: {
                     Text("Done")
                 })
                 .opacity(budget > 0 && items.count > 0 ? 1.0 : 0.5)
                 .disabled(!(budget > 0 && items.count > 0))
             }
         }
+    }
+    
+    private func addItems() {
+        let repository = CartItemRepository(context: _context)
+        repository.insert(items: items, budget: budget)
+        coordinator.popToRoot()
     }
 }
 

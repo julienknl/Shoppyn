@@ -13,13 +13,7 @@ struct InShoppingListScene: View {
     @State private var maximumBudget: Double = 0
     private var staticBudget: Double = 0
     @State private var presentError: Bool = false
-    @State private var items: [CartItem] = [
-        CartItem(name: "Coffee", quantity: 1),
-        CartItem(name: "Coffee", quantity: 1),
-        CartItem(name: "Coffee", quantity: 1),
-        CartItem(name: "Coffee", quantity: 1),
-        CartItem(name: "Coffee", quantity: 1)
-    ]
+    @State private var items: [CartItem] = []
     
     init(budget: Double) {
         self._maximumBudget = State(initialValue: budget)

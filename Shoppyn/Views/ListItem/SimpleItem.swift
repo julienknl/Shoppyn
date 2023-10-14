@@ -11,6 +11,7 @@ struct SimpleItem: View {
     
     @Binding var item: CartItem
     var showCheckbox: Bool = false
+    var isNew: Bool = true
     
     var body: some View {
         HStack {
@@ -23,7 +24,7 @@ struct SimpleItem: View {
             Text("\(item.quantity) x \(item.name)")
                 .lineLimit(1)
                 .padding([.leading, .trailing], showCheckbox ? 2 : 8)
-                .opacity(!showCheckbox && (!item.isCheckOn || item.amount <= 0) ? 0.5 : 1)
+                .opacity(!showCheckbox && !isNew && item.amount <= 0 ? 0.5 : 1)
             
             Spacer()
             
@@ -48,9 +49,9 @@ struct SimpleItem: View {
             }
 
             
-            if !showCheckbox {
+            if !showCheckbox && item.amount > 0 {
                 Text("$\(item.amount.round(to: 2))")
-                    .opacity(!showCheckbox && (!item.isCheckOn || item.amount <= 0) ? 0.5 : 1)
+                    .opacity(!showCheckbox && !isNew && item.amount <= 0 ? 0.5 : 1)
             }
             
         }.frame(height: 43)

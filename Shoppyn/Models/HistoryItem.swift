@@ -5,12 +5,24 @@
 //  Created by Julien on 6/10/2023.
 //
 
-import SwiftUI
+import Foundation
+import SwiftData
 
-struct HistoryItem: Identifiable {
-    var date: String?
-    var overBudget: Bool = false
-    var afterBudget: Double? = 0.0
-    var initialBudget: Double? = 0.0
-    var id: String = UUID().uuidString
+@Model
+class HistoryItem: Identifiable {
+    var id: String?
+    var date: Date?
+    var overBudget: Bool
+    var afterBudget: Double?
+    var initialBudget: Double?
+    var completed: Bool
+    
+    init(id: String? = nil, date: Date? = nil, overBudget: Bool = false, afterBudget: Double? = 0.0, initialBudget: Double? = 0.0, completed: Bool = false) {
+        self.id = id
+        self.date = date
+        self.overBudget = overBudget
+        self.afterBudget = afterBudget
+        self.initialBudget = initialBudget
+        self.completed = completed
+    }
 }

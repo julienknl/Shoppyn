@@ -6,22 +6,31 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HistoryScene: View {
     
     @EnvironmentObject private var coordinator: Coordinator
-    @State private var histories: [HistoryItem] = []
+    @Environment(\.modelContext) private var context
+    @Query private var histories: [HistoryItem]
     
     var body: some View {
         VStack {
-            List {
-                ForEach(histories) { history in
-                    SubtitledItem(history: history)
+            if !histories.isEmpty {
+                List {
+                    ForEach(histories) { history in
+                        SubtitledItem(history: history)
+                    }
                 }
+                .frame( maxWidth: .infinity)
+                .ignoresSafeArea(.all, edges: [.leading, .trailing])
+                .listStyle(PlainListStyle())
             }
-            .frame( maxWidth: .infinity)
-            .ignoresSafeArea(.all, edges: [.leading, .trailing])
-            .listStyle(PlainListStyle())
+            else {
+                NoDataView(imageName: "desertimage",
+                           title: "NO LIST TO SHOW",
+                           subtitle: "Tap on + to add a new list")
+            }
         }
         .navigationTitle("History")
         .toolbar {
