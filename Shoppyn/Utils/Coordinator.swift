@@ -9,7 +9,7 @@ import SwiftUI
 
 enum NavigationPage: Hashable, Identifiable {
     case history
-    case newShoppingList(isNew: Bool)
+    case newShoppingList(isNew: Bool, history: HistoryItem = HistoryItem())
     case inShoppingList(budget: Double)
     case completedShopping
     
@@ -42,8 +42,8 @@ class Coordinator: ObservableObject {
         case .history:
             HistoryScene()
             
-        case .newShoppingList(let isNew):
-            NewShoppingListScene(isNew: isNew)
+        case .newShoppingList(let isNew, let history):
+            NewShoppingListScene(isNew: isNew, historyItem: history)
             
         case .inShoppingList(let budget):
             InShoppingListScene(budget: budget)

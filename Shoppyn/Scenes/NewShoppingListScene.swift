@@ -11,17 +11,23 @@ struct NewShoppingListScene: View {
     
     @EnvironmentObject private var coordinator: Coordinator
     @Environment(\.modelContext) private var context
-    @State private var budget: Double = 0.0
+    private let repository: CartItemRepository
     @State private var item: CartItem = CartItem()
-    var isNew: Bool = false
-    @State var items: [CartItem] = []
+    private var isNew: Bool = false
+    @State private var historyItem: HistoryItem = HistoryItem()
+    
+    init(isNew: Bool, historyItem: HistoryItem = HistoryItem()) {
+        repository = CartItemRepository(context: _context)
+        self.isNew = isNew
+        self._historyItem = State(initialValue: historyItem)
+    }
     
     var body: some View {
         
         VStack {
             
-            UnderlineTextField(budget: Binding(get: {budget > 0 ? String(budget) : "" },
-                                               set: { if let newBudget = Double($0) { budget = newBudget } }), keyboardType: .decimalPad)
+            UnderlineTextField(budget: Binding(get: {historyItem.initialBudget ?? 0 > 0 ? String(historyItem.initialBudget ?? 0) : "" },
+                                               set: { if let newBudget = Double($0) { historyItem.initialBudget = newBudget } }), keyboardType: .decimalPad)
             
             HStack {
                 OutlineTextField(item: $item.name,
@@ -35,9 +41,9 @@ struct NewShoppingListScene: View {
                                  keyboardType: .decimalPad)
                 
                 Button(action: {
-                    items.append(CartItem(name: item.name,
-                                          quantity: item.quantity,
-                                          amount: 0.0))
+                    addItemByItem(CartItem(name: item.name,
+                                           quantity: item.quantity,
+                                           amount: 0.0))
                     
                     item = CartItem()
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -50,9 +56,14 @@ struct NewShoppingListScene: View {
             .padding([.top, .leading, .trailing], 16)
             
             List {
-                ForEach($items) { item in
+                ForEach($historyItem.cartItems) { item in
                     SimpleItem(item: item)
                 }
+                .onDelete(perform: { indexes in
+                    for index in indexes {
+                        deleteItem(historyItem.cartItems[index])
+                    }
+                })
             }
             .ignoresSafeArea()
             .listStyle(PlainListStyle())
@@ -61,36 +72,59 @@ struct NewShoppingListScene: View {
             Spacer()
         }
         .toolbar {
-            
-//            if !isNew {
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Button(action: {}, label: {
-//                        Text("Edit")
-//                    })
-//                }
-//            }
-            
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    if isNew {
-                        addItems()
-                    }
-                }, label: {
-                    Text("Done")
-                })
-                .opacity(budget > 0 && items.count > 0 ? 1.0 : 0.5)
-                .disabled(!(budget > 0 && items.count > 0))
+
+            if isNew {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        if isNew {
+                            addItems()
+                        }
+                    }, label: {
+                        Text("Done")
+                    })
+                    .opacity(historyItem.initialBudget ?? 0 > 0 && historyItem.cartItems.count > 0 ? 1.0 : 0.5)
+                    .disabled(!(historyItem.initialBudget ?? 0 > 0 && historyItem.cartItems.count > 0))
+                }
             }
+        }
+        .onDisappear(perform: {
+            if !isNew {
+                updateItem()
+            }
+        })
+    }
+    
+    private func addItemByItem(_ item: CartItem) {
+        
+        if isNew {
+            historyItem.cartItems.append(item)
+        }
+        else {
+            item.history = historyItem
+            repository.insert(item)
         }
     }
     
     private func addItems() {
-        let repository = CartItemRepository(context: _context)
-        repository.insert(items: items, budget: budget)
+        repository.insert(items: historyItem.cartItems, budget: historyItem.initialBudget ?? 0)
         coordinator.popToRoot()
+    }
+    
+    private func deleteItem(_ item: CartItem) {
+        if isNew {
+            historyItem.cartItems.removeAll(where: { $0.id == item.id })
+        }
+        else {
+            repository.delete(item)
+        }
+    }
+    
+    private func updateItem() {
+        let repository = HistoryRepository(context: _context)
+        repository.update(historyItem, newBudget: historyItem.initialBudget ?? 0)
     }
 }
 
 #Preview {
-    NewShoppingListScene()
+    NewShoppingListScene(isNew: true)
 }

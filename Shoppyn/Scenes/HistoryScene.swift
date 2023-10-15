@@ -20,7 +20,17 @@ struct HistoryScene: View {
                 List {
                     ForEach(histories) { history in
                         SubtitledItem(history: history)
+                            .onTapGesture {
+                                coordinator.push(.newShoppingList(isNew: false, 
+                                                                  history: history))
+                            }
                     }
+                    .onDelete(perform: { indexes in
+                        for index in indexes {
+                            deleteItem(histories[index])
+                        }
+                    })
+                    
                 }
                 .frame( maxWidth: .infinity)
                 .ignoresSafeArea(.all, edges: [.leading, .trailing])
@@ -42,6 +52,18 @@ struct HistoryScene: View {
                 }
             }
         }
+    }
+    
+    private func deleteItem(_ history: HistoryItem) {
+        let repository = CartItemRepository(context: _context)
+//        var predicate = #Predicate<CartItem>{ item in
+//            return history.id == item.referenceId
+//        }
+//        
+//        @Query(filter: predicate) var cartItems: [CartItem] = []
+//        
+//        repository.delete(history, 
+//                          items: cartItems)
     }
 }
 

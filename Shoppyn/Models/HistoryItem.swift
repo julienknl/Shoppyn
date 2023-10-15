@@ -10,12 +10,13 @@ import SwiftData
 
 @Model
 class HistoryItem: Identifiable {
-    var id: String?
+    @Attribute(.unique) var id: String?
     var date: Date?
     var overBudget: Bool
     var afterBudget: Double?
     var initialBudget: Double?
     var completed: Bool
+    var cartItems: [CartItem] = []
     
     init(id: String? = nil, date: Date? = nil, overBudget: Bool = false, afterBudget: Double? = 0.0, initialBudget: Double? = 0.0, completed: Bool = false) {
         self.id = id

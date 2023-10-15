@@ -16,17 +16,33 @@ class CartItemRepository {
     }
     
     func insert(items: [CartItem], budget: Double) {
-        let uid = UUID().uuidString
+        let tmpHistory = HistoryItem(id: UUID().uuidString,
+                                     date: Date(),
+                                     initialBudget: budget)
+        
+        //Then create a history
+        context.wrappedValue.insert(tmpHistory)
         
         // Add list of items first
         items.forEach { item in
-            item.referenceId = uid
+            item.history = tmpHistory
             context.wrappedValue.insert(item)
         }
         
-        //Then create a history
-        context.wrappedValue.insert(HistoryItem(id: uid,
-                                                date: Date(),
-                                                initialBudget: budget))
+    }
+    
+    func insert(_ item: CartItem) {
+        context.wrappedValue.insert(item)
+    }
+    
+    func delete(_ item: CartItem) {
+        context.wrappedValue.delete(item)
+        
+        do {
+            try context.wrappedValue.save()
+        }
+        catch {
+            print("Failed to delete cart item with error: \(error.localizedDescription)")
+        }
     }
 }
