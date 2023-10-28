@@ -1,23 +1,19 @@
 //
-//  Main.swift
+//  MainSettingScene.swift
 //  Shoppyn
 //
-//  Created by Julien on 5/10/2023.
+//  Created by Julien on 28/10/2023.
 //
 
 import SwiftUI
 
-struct MainScene: View {
+struct MainSettingScene: View {
     
     @StateObject private var coordinator = Coordinator()
     
-    init() {
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Colour.main)]
-    }
-    
     var body: some View {
         NavigationStack(path: $coordinator.path) {
-            coordinator.build(page: .history)
+            coordinator.build(page: .setting)
                 .navigationDestination(for: NavigationPage.self, destination: { page in
                     coordinator.build(page: page)
                 })
@@ -31,5 +27,5 @@ struct MainScene: View {
 }
 
 #Preview {
-    MainScene()
+    MainSettingScene()
 }

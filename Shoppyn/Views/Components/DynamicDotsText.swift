@@ -12,14 +12,19 @@ struct DynamicDotsText: View {
     var firstText: String = "Budget"
     var secondText: String = "$70"
     var fontSize: CGFloat = 14
+    var textColor: Color = Colour.darkGray
     
     var body: some View {
         HStack {
             Text(firstText)
                 .lineLimit(1)
-            Text(String(repeating: ".", count: calculateDotsCount(for: firstText, secondText: secondText)))
-                        .lineLimit(1)
+                .foregroundStyle(textColor)
+            Text(String(repeating: ".", 
+                        count: calculateDotsCount(for: firstText, secondText: secondText)))
+                .lineLimit(1)
+                .foregroundStyle(textColor)
             Text(secondText)
+                .foregroundStyle(textColor)
         }
     }
     

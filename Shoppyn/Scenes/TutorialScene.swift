@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TutorialScene: View {
     
+    @EnvironmentObject private var coordinator: Coordinator
+    @AppStorage("hasShownTutorial") var hasShownTutorial = false
     @State private var currentPage = 0
     
     private let pages = [
@@ -34,7 +36,8 @@ struct TutorialScene: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        
+                        hasShownTutorial = true
+                        coordinator.dismissOverFullScreen()
                     }, label: {
                         Text("Done")
                             .foregroundStyle(Colour.darkGray)

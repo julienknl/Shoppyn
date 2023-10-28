@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct SettingScene: View {
+    
+    @EnvironmentObject private var coordinator: Coordinator
+    private var settings: [Setting] = [Setting(title: "Tutorial")]
+    
     var body: some View {
-        Text("Setting view")
+        VStack {
+            List {
+                ForEach(settings) { setting in
+                    Button(action: {
+                        coordinator.present(sheet: .tutorial)
+                    }, label: {
+                        DefaultItem(title: setting.title ?? "NaN")
+                    })
+                }
+            }
+        }
+        .navigationTitle("Setting")
     }
 }
 

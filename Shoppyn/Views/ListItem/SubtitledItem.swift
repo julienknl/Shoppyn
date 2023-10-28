@@ -32,7 +32,7 @@ struct SubtitledItem: View {
             return "Not completed"
         }
         
-        return !history.overBudget ? "You saved $\(afterBudget) on a budget of $\(initialBudget)" : "You loss $\(afterBudget) on a budget of $\(initialBudget)"
+        return !history.overBudget ? "You saved $\(initialBudget - afterBudget) on a budget of $\(initialBudget)" : "You loss $\(initialBudget - afterBudget) on a budget of $\(initialBudget)"
     }
 }
 

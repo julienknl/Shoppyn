@@ -25,8 +25,6 @@
 		4B4F11512ACE998C00B845C2 /* Colour.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4F11502ACE998C00B845C2 /* Colour.swift */; };
 		4B5DB6652ACF0BBE00F8E96C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5DB6642ACF0BBE00F8E96C /* Coordinator.swift */; };
 		4B7BE1072ACC4E490024CFCD /* ShoppynApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7BE1062ACC4E490024CFCD /* ShoppynApp.swift */; };
-		4B7BE1092ACC4E490024CFCD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7BE1082ACC4E490024CFCD /* ContentView.swift */; };
-		4B7BE10B2ACC4E490024CFCD /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7BE10A2ACC4E490024CFCD /* Item.swift */; };
 		4B7BE10D2ACC4E4A0024CFCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7BE10C2ACC4E4A0024CFCD /* Assets.xcassets */; };
 		4B7BE1102ACC4E4A0024CFCD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B7BE10F2ACC4E4A0024CFCD /* Preview Assets.xcassets */; };
 		4B7BE11A2ACC4E4B0024CFCD /* ShoppynTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B7BE1192ACC4E4B0024CFCD /* ShoppynTests.swift */; };
@@ -42,6 +40,9 @@
 		4BFBC0F12ACEDC5F00DF434E /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFBC0F02ACEDC5F00DF434E /* MainScene.swift */; };
 		4BFDF0682AD031C80020E018 /* UnderlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDF0672AD031C80020E018 /* UnderlineTextField.swift */; };
 		4BFDF06C2AD048980020E018 /* OutlineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFDF06B2AD048980020E018 /* OutlineTextField.swift */; };
+		4BFEF3AC2AED56B400D2B2FC /* DefaultItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEF3AB2AED56B400D2B2FC /* DefaultItem.swift */; };
+		4BFEF3AE2AED5B3900D2B2FC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEF3AD2AED5B3900D2B2FC /* Setting.swift */; };
+		4BFEF3B02AED5D7B00D2B2FC /* MainSettingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BFEF3AF2AED5D7B00D2B2FC /* MainSettingScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,8 +82,6 @@
 		4B5DB6642ACF0BBE00F8E96C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		4B7BE1032ACC4E490024CFCD /* Shoppyn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppyn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B7BE1062ACC4E490024CFCD /* ShoppynApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppynApp.swift; sourceTree = "<group>"; };
-		4B7BE1082ACC4E490024CFCD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4B7BE10A2ACC4E490024CFCD /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4B7BE10C2ACC4E4A0024CFCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B7BE10F2ACC4E4A0024CFCD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4B7BE1152ACC4E4B0024CFCD /* ShoppynTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoppynTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +99,9 @@
 		4BFBC0F02ACEDC5F00DF434E /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		4BFDF0672AD031C80020E018 /* UnderlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineTextField.swift; sourceTree = "<group>"; };
 		4BFDF06B2AD048980020E018 /* OutlineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineTextField.swift; sourceTree = "<group>"; };
+		4BFEF3AB2AED56B400D2B2FC /* DefaultItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultItem.swift; sourceTree = "<group>"; };
+		4BFEF3AD2AED5B3900D2B2FC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		4BFEF3AF2AED5D7B00D2B2FC /* MainSettingScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSettingScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				4BD6B0D92AD004A900EC1D4C /* HistoryItem.swift */,
 				4B0F2BDC2AD561D100D45C32 /* CartItem.swift */,
 				4B1398522AECF9A6008F8E70 /* TutorialPage.swift */,
+				4BFEF3AD2AED5B3900D2B2FC /* Setting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				4BDE916C2AD677F6005908CD /* InShoppingListScene.swift */,
 				4BFAC1FA2AD9623700DF647C /* CompletedShoppingScene.swift */,
 				4B13984E2AECF5A3008F8E70 /* TutorialScene.swift */,
+				4BFEF3AF2AED5D7B00D2B2FC /* MainSettingScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -219,8 +223,6 @@
 				4B4F11492ACE92C800B845C2 /* Scenes */,
 				4B4F11472ACE8DD600B845C2 /* Models */,
 				4B7BE1062ACC4E490024CFCD /* ShoppynApp.swift */,
-				4B7BE1082ACC4E490024CFCD /* ContentView.swift */,
-				4B7BE10A2ACC4E490024CFCD /* Item.swift */,
 				4B7BE10C2ACC4E4A0024CFCD /* Assets.xcassets */,
 				4B7BE10E2ACC4E4A0024CFCD /* Preview Content */,
 			);
@@ -257,6 +259,7 @@
 			children = (
 				4BD6B0DC2AD0071600EC1D4C /* SubtitledItem.swift */,
 				4B0F2BD52AD558FC00D45C32 /* SimpleItem.swift */,
+				4BFEF3AB2AED56B400D2B2FC /* DefaultItem.swift */,
 			);
 			path = ListItem;
 			sourceTree = "<group>";
@@ -411,21 +414,22 @@
 				4BFAC1FD2AD964CB00DF647C /* DynamicDotsText.swift in Sources */,
 				4B072CF62AD934CC00EBBA46 /* UIApplicationExtension.swift in Sources */,
 				4BDE91712AD6786A005908CD /* CircularProgressView.swift in Sources */,
+				4BFEF3AE2AED5B3900D2B2FC /* Setting.swift in Sources */,
+				4BFEF3B02AED5D7B00D2B2FC /* MainSettingScene.swift in Sources */,
 				4B0F2BDD2AD561D100D45C32 /* CartItem.swift in Sources */,
 				4B4F114E2ACE96BE00B845C2 /* SettingScene.swift in Sources */,
-				4B7BE1092ACC4E490024CFCD /* ContentView.swift in Sources */,
 				4BFDF0682AD031C80020E018 /* UnderlineTextField.swift in Sources */,
 				4B1398512AECF5EC008F8E70 /* TutorialPageView.swift in Sources */,
 				4B072CF82AD946F600EBBA46 /* StringExtension.swift in Sources */,
 				4BFBC0F12ACEDC5F00DF434E /* MainScene.swift in Sources */,
 				4B32F0442ADB02C80053E13B /* DateExtension.swift in Sources */,
 				4BFAC1FB2AD9623700DF647C /* CompletedShoppingScene.swift in Sources */,
+				4BFEF3AC2AED56B400D2B2FC /* DefaultItem.swift in Sources */,
 				4BFBC0EF2ACED0FA00DF434E /* NewShoppingListScene.swift in Sources */,
 				4B32F0422ADAEA330053E13B /* NoDataView.swift in Sources */,
 				4BD6B0DA2AD004A900EC1D4C /* HistoryItem.swift in Sources */,
 				4B2614182ADC2412006CC583 /* HistoryRepository.swift in Sources */,
 				4BD6B0DD2AD0071600EC1D4C /* SubtitledItem.swift in Sources */,
-				4B7BE10B2ACC4E490024CFCD /* Item.swift in Sources */,
 				4B0F2BD62AD558FC00D45C32 /* SimpleItem.swift in Sources */,
 				4BFDF06C2AD048980020E018 /* OutlineTextField.swift in Sources */,
 				4B4F11512ACE998C00B845C2 /* Colour.swift in Sources */,

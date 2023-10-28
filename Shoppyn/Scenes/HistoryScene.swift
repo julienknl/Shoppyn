@@ -15,6 +15,7 @@ struct HistoryScene: View {
     @Query private var histories: [HistoryItem]
     
     var body: some View {
+        
         VStack {
             
             if !histories.isEmpty {
@@ -58,6 +59,11 @@ struct HistoryScene: View {
                 }
             }
         }
+        .onAppear(perform: {
+            if !hasShownTutorial {
+                coordinator.present(sheet: .tutorial)
+            }
+        })
     }
     
     private func deleteItem(_ history: HistoryItem) {

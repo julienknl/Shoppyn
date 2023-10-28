@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum NavigationPage: Hashable, Identifiable {
-    case history
+    case history, setting
     case newShoppingList(isNew: Bool, history: HistoryItem = HistoryItem())
     case inShoppingList(history: HistoryItem)
     case completedShopping(history: HistoryItem)
@@ -19,7 +19,7 @@ enum NavigationPage: Hashable, Identifiable {
     
 }
 
-enum Sheet: String, Identifiable {
+enum OverFullScreen: String, Identifiable {
     case tutorial
     
     var id: String {
@@ -30,7 +30,7 @@ enum Sheet: String, Identifiable {
 class Coordinator: ObservableObject {
     
     @Published var path = NavigationPath()
-    @Published var sheet: Sheet?
+    @Published var sheet: OverFullScreen?
     
     func push( _ page: NavigationPage) {
         path.append(page)
@@ -44,8 +44,12 @@ class Coordinator: ObservableObject {
         path.removeLast(path.count)
     }
     
-    func present(sheet: Sheet) {
+    func present(sheet: OverFullScreen) {
         self.sheet = sheet
+    }
+    
+    func dismissOverFullScreen() {
+        self.sheet = nil
     }
     
     @ViewBuilder
@@ -54,6 +58,9 @@ class Coordinator: ObservableObject {
             
         case .history:
             HistoryScene()
+            
+        case .setting:
+            SettingScene()
             
         case .newShoppingList(let isNew, let history):
             NewShoppingListScene(isNew: isNew, historyItem: history)
@@ -68,7 +75,7 @@ class Coordinator: ObservableObject {
     }
     
     @ViewBuilder
-    func build(sheet: Sheet) -> some View {
+    func build(sheet: OverFullScreen) -> some View {
         switch sheet {
             
         case .tutorial:

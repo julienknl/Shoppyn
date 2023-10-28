@@ -19,14 +19,21 @@ struct CompletedShoppingScene: View {
                 .foregroundStyle(Colour.darkGray)
             
             VStack{
-                DynamicDotsText(firstText: "Budget", secondText: "$\(history.initialBudget ?? 0.0)", fontSize: 20)
-                    .padding([.leading, .trailing])
+                DynamicDotsText(firstText: "Budget",
+                                secondText: "$\(history.initialBudget ?? 0.0)",
+                                fontSize: 20)
+                .padding([.leading, .trailing])
                 
-                DynamicDotsText(firstText: "Total spent", secondText: "$\(history.afterBudget ?? 0.0)", fontSize: 20)
-                    .padding([.leading, .trailing])
+                DynamicDotsText(firstText: "Total spent",
+                                secondText: "$\(history.afterBudget ?? 0.0)",
+                                fontSize: 20)
+                .padding([.leading, .trailing])
                 
-                DynamicDotsText(firstText: history.overBudget ? "Loss" : "Saved", secondText: "$\((history.initialBudget ?? 0) - (history.afterBudget ?? 0))", fontSize: 20)
-                    .padding([.leading, .trailing])
+                DynamicDotsText(firstText: history.overBudget ? "Loss" : "Saved",
+                                secondText: "$\((history.initialBudget ?? 0) - (history.afterBudget ?? 0))",
+                                fontSize: 20,
+                                textColor: history.overBudget ? Color.red : Colour.main)
+                .padding([.leading, .trailing])
             }
             .padding()
             .background(Colour.main.opacity(0.1))

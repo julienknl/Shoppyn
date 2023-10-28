@@ -12,7 +12,6 @@ import SwiftData
 struct ShoppynApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
             CartItem.self,
             HistoryItem.self
         ])
@@ -32,7 +31,7 @@ struct ShoppynApp: App {
                 MainScene()
                     .tabItem { Image(uiImage: UIImage(named: "mainicon") ?? UIImage()) }
                 
-                SettingScene()
+                MainSettingScene()
                     .tabItem { Image(uiImage: UIImage(named: "moreicon") ?? UIImage()) }
             }
             .tint(Colour.main)
