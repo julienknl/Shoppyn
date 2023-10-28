@@ -14,6 +14,7 @@ struct NewShoppingListScene: View {
     private let repository: CartItemRepository
     @State private var item: CartItem = CartItem()
     private var isNew: Bool = false
+    @State private var tmpCartItems: [CartItem] = []
     @State private var historyItem: HistoryItem = HistoryItem()
     
     init(isNew: Bool, historyItem: HistoryItem = HistoryItem()) {
@@ -56,7 +57,7 @@ struct NewShoppingListScene: View {
             .padding([.top, .leading, .trailing], 16)
             
             List {
-                ForEach($historyItem.cartItems) { item in
+                ForEach(!isNew ? $historyItem.cartItems : $tmpCartItems) { item in
                     SimpleItem(item: item)
                 }
                 .onDelete(perform: { indexes in
@@ -76,14 +77,12 @@ struct NewShoppingListScene: View {
             if isNew {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        if isNew {
-                            addItems()
-                        }
+                        addItems()
                     }, label: {
                         Text("Done")
                     })
-                    .opacity(historyItem.initialBudget ?? 0 > 0 && historyItem.cartItems.count > 0 ? 1.0 : 0.5)
-                    .disabled(!(historyItem.initialBudget ?? 0 > 0 && historyItem.cartItems.count > 0))
+                    .opacity(historyItem.initialBudget ?? 0 > 0 && tmpCartItems.count > 0 ? 1.0 : 0.5)
+                    .disabled(!(historyItem.initialBudget ?? 0 > 0 && tmpCartItems.count > 0))
                 }
             }
         }
@@ -97,7 +96,7 @@ struct NewShoppingListScene: View {
     private func addItemByItem(_ item: CartItem) {
         
         if isNew {
-            historyItem.cartItems.append(item)
+            tmpCartItems.insert(item, at: 0)
         }
         else {
             item.history = historyItem
@@ -106,13 +105,14 @@ struct NewShoppingListScene: View {
     }
     
     private func addItems() {
-        repository.insert(items: historyItem.cartItems, budget: historyItem.initialBudget ?? 0)
+        let repository = HistoryRepository(context: _context)
+        repository.insert(items: tmpCartItems, budget: historyItem.initialBudget ?? 0)
         coordinator.popToRoot()
     }
     
     private func deleteItem(_ item: CartItem) {
         if isNew {
-            historyItem.cartItems.removeAll(where: { $0.id == item.id })
+            tmpCartItems.removeAll(where: { $0.id == item.id })
         }
         else {
             repository.delete(item)

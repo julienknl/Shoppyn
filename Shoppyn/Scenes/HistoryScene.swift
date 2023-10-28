@@ -18,12 +18,17 @@ struct HistoryScene: View {
         VStack {
             if !histories.isEmpty {
                 List {
-                    ForEach(histories) { history in
-                        SubtitledItem(history: history)
-                            .onTapGesture {
-                                coordinator.push(.newShoppingList(isNew: false, 
-                                                                  history: history))
+                    ForEach(histories.sorted(by: { $0.date ?? Date() > $1.date ?? Date() })) { history in
+                        Button(action: {
+                            if history.completed {
+                                coordinator.push(.completedShopping(history: history))
                             }
+                            else {
+                                coordinator.push(.inShoppingList(history: history))
+                            }
+                        }, label: {
+                            SubtitledItem(history: history)
+                        })
                     }
                     .onDelete(perform: { indexes in
                         for index in indexes {
@@ -55,15 +60,8 @@ struct HistoryScene: View {
     }
     
     private func deleteItem(_ history: HistoryItem) {
-        let repository = CartItemRepository(context: _context)
-//        var predicate = #Predicate<CartItem>{ item in
-//            return history.id == item.referenceId
-//        }
-//        
-//        @Query(filter: predicate) var cartItems: [CartItem] = []
-//        
-//        repository.delete(history, 
-//                          items: cartItems)
+        let repository = HistoryRepository(context: _context)
+        repository.delete(history)
     }
 }
 

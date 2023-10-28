@@ -18,4 +18,7 @@ extension Double {
         return numberFormatter.string(from: NSNumber(value: self)) ?? ""
     }
     
+    var isNegative: Bool {
+        return self < 0
+    }
 }

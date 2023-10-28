@@ -28,12 +28,11 @@ struct SubtitledItem: View {
     }
     
     func subtitle(history: HistoryItem) -> String {
-        guard let initialBudget = history.initialBudget, let afterBudget = history.afterBudget,  initialBudget > 0.0, afterBudget > 0.0 else {
-            print("Error: Failed to render the subtitle as the data might not be present")
+        guard let initialBudget = history.initialBudget, let afterBudget = history.afterBudget,  initialBudget > 0.0, afterBudget > 0.0, history.completed else {
             return "Not completed"
         }
         
-        return history.overBudget ? "You saved $\(afterBudget) on a budget of $\(initialBudget)" : "You loss $\(afterBudget) on a budget of $\(initialBudget)"
+        return !history.overBudget ? "You saved $\(afterBudget) on a budget of $\(initialBudget)" : "You loss $\(afterBudget) on a budget of $\(initialBudget)"
     }
 }
 

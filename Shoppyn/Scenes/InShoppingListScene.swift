@@ -9,16 +9,15 @@ import SwiftUI
 
 struct InShoppingListScene: View {
     
-    @State private var progress: Double = 0
+    @EnvironmentObject private var coordinator: Coordinator
+    @Environment(\.modelContext) private var context
+    @State var history: HistoryItem = HistoryItem()
     @State private var maximumBudget: Double = 0
-    private var staticBudget: Double = 0
     @State private var presentError: Bool = false
-    @State private var items: [CartItem] = []
     
-    init(budget: Double) {
-        self._maximumBudget = State(initialValue: budget)
-        self._progress = State(initialValue: budget/1)
-        staticBudget = budget
+    init(history: HistoryItem) {
+        self._history = State(initialValue: history)
+        self._maximumBudget = State(initialValue: history.afterBudget ?? 0.0)
     }
     
     var body: some View {
@@ -26,23 +25,23 @@ struct InShoppingListScene: View {
         GeometryReader { geometry in
             VStack {
                 
-                CircularProgressView(progress: $progress)
+                CircularProgressView(progress: $history.progress)
                     .frame(width: geometry.size.width - geometry.size.width/3)
                     .overlay(content: {
                         VStack {
-                            Text("Budget: $\(staticBudget.round(to: 2))")
+                            Text("Budget: $\(history.initialBudget?.round(to: 2) ?? "NaN")")
                                 .foregroundStyle(Colour.main)
                             Text("$\(maximumBudget.round(to: 2)) left")
                         }
                     })
                 
                 List {
-                    ForEach($items) { $item in
+                    ForEach($history.cartItems) { $item in
                         SimpleItem(item: $item, showCheckbox: true)
                             .onSubmit {
-                                $maximumBudget.wrappedValue = staticBudget - items.reduce(0, { $0 + $1.amount })
-                                let calculatedProgress = max(0, $maximumBudget.wrappedValue) / staticBudget
-                                $progress.wrappedValue = calculatedProgress
+                                $maximumBudget.wrappedValue = (history.initialBudget ?? 0.0) - history.cartItems.reduce(0, { $0 + $1.amount })
+                                let calculatedProgress = max(0, $maximumBudget.wrappedValue) / (history.initialBudget ?? 0.0)
+                                $history.progress.wrappedValue = calculatedProgress
                             }
                             .submitLabel(.done)
                     }
@@ -51,12 +50,20 @@ struct InShoppingListScene: View {
                 .padding([.top])
             }
             .frame(maxWidth: .infinity)
+            .onDisappear(perform: {
+                updateHistory()
+            })
         }
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    presentError = items.contains(where: { $0.amount == 0 && $0.isCheckOn })
+                    presentError = history.cartItems.contains(where: { $0.amount == 0 && $0.isCheckOn })
+                    
+                    if !presentError {
+                        updateHistory(completed: true)
+                        coordinator.popToRoot()
+                    }
                 } label: {
                     Text("Done")
                 }
@@ -68,8 +75,13 @@ struct InShoppingListScene: View {
             }
         }
     }
+    
+    private func updateHistory(completed: Bool = false) {
+        let repository = HistoryRepository(context: _context)
+        repository.update(history, afterBudget: maximumBudget, completed: completed)
+    }
 }
 
 #Preview {
-    InShoppingListScene(budget: 700)
+    InShoppingListScene(history: HistoryItem())
 }

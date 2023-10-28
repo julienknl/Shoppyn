@@ -15,22 +15,6 @@ class CartItemRepository {
         self.context = context
     }
     
-    func insert(items: [CartItem], budget: Double) {
-        let tmpHistory = HistoryItem(id: UUID().uuidString,
-                                     date: Date(),
-                                     initialBudget: budget)
-        
-        //Then create a history
-        context.wrappedValue.insert(tmpHistory)
-        
-        // Add list of items first
-        items.forEach { item in
-            item.history = tmpHistory
-            context.wrappedValue.insert(item)
-        }
-        
-    }
-    
     func insert(_ item: CartItem) {
         context.wrappedValue.insert(item)
     }

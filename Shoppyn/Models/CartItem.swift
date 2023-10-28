@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class CartItem: Identifiable {
-    var id: String?
+    var id: String = UUID().uuidString
     var name: String
     var quantity: Int
     var amount: Double
@@ -20,7 +20,6 @@ class CartItem: Identifiable {
     var history: HistoryItem? = nil
     
     init(name: String = "", quantity: Int = 0, amount: Double = 0, isCheckOn: Bool = false) {
-        self.id = UUID().uuidString
         self.name = name
         self.quantity = quantity
         self.amount = amount
