@@ -9,13 +9,14 @@ import SwiftUI
 import SwiftData
 
 struct HistoryScene: View {
-    
+    @AppStorage("hasShownTutorial") var hasShownTutorial = false
     @EnvironmentObject private var coordinator: Coordinator
     @Environment(\.modelContext) private var context
     @Query private var histories: [HistoryItem]
     
     var body: some View {
         VStack {
+            
             if !histories.isEmpty {
                 List {
                     ForEach(histories.sorted(by: { $0.date ?? Date() > $1.date ?? Date() })) { history in

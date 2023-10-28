@@ -21,6 +21,9 @@ struct MainScene: View {
                 .navigationDestination(for: NavigationPage.self, destination: { page in
                     coordinator.build(page: page)
                 })
+                .sheet(item: $coordinator.sheet) { sheet in
+                    coordinator.build(sheet: sheet)
+                }
         }
         .tint(Colour.darkGray)
         .environmentObject(coordinator)

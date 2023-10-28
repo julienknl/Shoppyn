@@ -19,9 +19,18 @@ enum NavigationPage: Hashable, Identifiable {
     
 }
 
+enum Sheet: String, Identifiable {
+    case tutorial
+    
+    var id: String {
+        return UUID().uuidString
+    }
+}
+
 class Coordinator: ObservableObject {
     
     @Published var path = NavigationPath()
+    @Published var sheet: Sheet?
     
     func push( _ page: NavigationPage) {
         path.append(page)
@@ -33,6 +42,10 @@ class Coordinator: ObservableObject {
     
     func popToRoot() {
         path.removeLast(path.count)
+    }
+    
+    func present(sheet: Sheet) {
+        self.sheet = sheet
     }
     
     @ViewBuilder
@@ -50,6 +63,16 @@ class Coordinator: ObservableObject {
             
         case .completedShopping(let history):
             CompletedShoppingScene(history: history)
+            
+        }
+    }
+    
+    @ViewBuilder
+    func build(sheet: Sheet) -> some View {
+        switch sheet {
+            
+        case .tutorial:
+            TutorialScene()
             
         }
     }
